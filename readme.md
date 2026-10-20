@@ -1,4 +1,4 @@
-# Detección de LDDoS mediante Agrupamiento Inteligente (Tema 10)
+# Detección de LDDoS mediante Agrupamiento Inteligente
 
 Proyecto cuasi-experimental desarrollado para el Examen Parcial de Inteligencia Artificial II (Universidad Nacional de Ingeniería, 2026-2).
 
@@ -9,5 +9,5 @@ pip install -r requirements.txt
 python main.py
 ```
 
-## Resultados
-El script procesa 100,000 flujos de tráfico de red crudo (CICIoT2023) y genera el gráfico comparativo `output/comparativa_pre_post_test.png`.
+## Nota:
+Se usa la conbinacion de los 3 archivo del dataset CICIOT2023
