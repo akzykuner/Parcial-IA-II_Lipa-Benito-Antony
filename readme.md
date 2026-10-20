@@ -2,7 +2,7 @@
 
 Examen Parcial de Inteligencia Artificial II (UNI-FIEE, 2026-2). Tema 10.
 
-## Diseño (Ruta B)
+## Diseño
 - **Positivo (ataque de baja tasa):** `DDoS-SlowLoris`. **Negativo:** `BenignTraffic`. Los demás ataques se descartan.
 - **Sin fuga de datos:** partición estratificada 60/10/30 (train/val/test); el escalado, PCA, centroides y umbrales se ajustan solo con *train*; los umbrales se calibran con benigno de *val*; todas las métricas se reportan en *test*.
 - **5 semillas** (partición y muestreo distintos); se reporta media ± desviación.
