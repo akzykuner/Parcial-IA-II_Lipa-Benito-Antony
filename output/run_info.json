@@ -1,0 +1,123 @@
+{
+  "fecha": "2026-10-19T22:11:45",
+  "python": "3.14.0",
+  "numpy": "2.5.4",
+  "pandas": "3.0.6",
+  "scikit_learn": "1.9.1",
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "dataset_stats": {
+    "filas_totales_csv": 7845673,
+    "tras_filtro_de_clases": {
+      "BenignTraffic": 184766,
+      "DDoS-SlowLoris": 3999
+    },
+    "filas_eliminadas_NaN_Inf": 0,
+    "tras_limpieza_NaN_Inf": {
+      "BenignTraffic": 184766,
+      "DDoS-SlowLoris": 3999
+    },
+    "duplicados_eliminados": 6518,
+    "final_por_clase": {
+      "BenignTraffic": 178379,
+      "DDoS-SlowLoris": 3868
+    }
+  },
+  "config": {
+    "BASE_DIR": "E:\\8to_ciclo\\Inteligencia artifial II\\Parcial\\Ejecucion",
+    "DATA_DIR": "E:\\8to_ciclo\\Inteligencia artifial II\\Parcial\\Ejecucion\\data",
+    "RAW_DATA_DIR": "E:\\8to_ciclo\\Inteligencia artifial II\\Parcial\\Ejecucion\\data\\raw",
+    "PROCESSED_DIR": "E:\\8to_ciclo\\Inteligencia artifial II\\Parcial\\Ejecucion\\data\\processed",
+    "OUTPUT_DIR": "E:\\8to_ciclo\\Inteligencia artifial II\\Parcial\\Ejecucion\\output",
+    "LABEL_COLUMN": "label",
+    "BENIGN_CLASSES": [
+      "BenignTraffic"
+    ],
+    "POSITIVE_CLASSES": [
+      "DDoS-SlowLoris"
+    ],
+    "FEATURE_COLUMNS": [
+      "flow_duration",
+      "Header_Length",
+      "Protocol_Type",
+      "Duration",
+      "Rate",
+      "Srate",
+      "Drate",
+      "fin_flag_number",
+      "syn_flag_number",
+      "rst_flag_number",
+      "psh_flag_number",
+      "ack_flag_number",
+      "ece_flag_number",
+      "cwr_flag_number",
+      "ack_count",
+      "syn_count",
+      "fin_count",
+      "urg_count",
+      "rst_count",
+      "HTTP",
+      "HTTPS",
+      "TCP",
+      "UDP",
+      "ICMP",
+      "Tot_sum",
+      "Min",
+      "Max",
+      "AVG",
+      "Std",
+      "Tot_size",
+      "IAT",
+      "Number",
+      "Magnitue",
+      "Radius",
+      "Covariance",
+      "Variance",
+      "Weight"
+    ],
+    "RATE_COLUMN": "Rate",
+    "CHUNK_SIZE": 500000,
+    "DROP_DUPLICATES": true,
+    "LOG1P_FEATURES": false,
+    "SEEDS": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "TEST_SIZE": 0.3,
+    "VAL_SIZE": 0.1,
+    "TARGET_BENIGN_QUANTILE": 0.99,
+    "PCA_N_COMPONENTS": 5,
+    "N_CLUSTERS": 12,
+    "KMEANS_BATCH_SIZE": 10000,
+    "KMEANS_N_INIT": 3,
+    "MAX_FIT_ROWS": 400000,
+    "SWEEP_D": [
+      2,
+      3,
+      5,
+      8,
+      10,
+      15
+    ],
+    "SWEEP_K": [
+      4,
+      8,
+      12,
+      16,
+      24
+    ],
+    "RUN_EWMA": false,
+    "EWMA_ALPHA": 0.05,
+    "EWMA_K": 3.0,
+    "IF_N_ESTIMATORS": 100,
+    "RF_N_ESTIMATORS": 100
+  }
+}
