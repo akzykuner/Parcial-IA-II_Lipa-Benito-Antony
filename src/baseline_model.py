@@ -1,41 +1,48 @@
 """
-src/baseline_model.py - Modelo Pre-Test (Sistema Tradicional EWMA / Umbrales Estáticos)
---------------------------------------------------------------------------------------
-Este módulo implementa el enfoque de detección tradicional basado en Promedio Móvil
-Exponencialmente Ponderado (EWMA) y umbrales estáticos de velocidad/volumen de tráfico.
+src/baseline_model.py - Modelos Pre-Test (sistema tradicional volumétrico)
+--------------------------------------------------------------------------
+1) StaticVolumetricThreshold: alarma si Rate supera un umbral estático. El umbral
+   se fija con el percentil 99 del tráfico benigno de validación (sin ver ataques).
+   Es la forma estacionaria de un detector EWMA con umbral fijo.
+2) EWMADetector (referencia, opcional): EWMA recursivo sobre las filas en ORDEN DE
+   ARCHIVO. Los CSV de CICIoT2023 no son una serie temporal ordenada, por lo que este
+   detector es solo una referencia y NO debe presentarse como detección temporal.
+   La media/desviación usan solo el pasado (shift(1)); no hay umbrales ocultos.
 """
-
-import sys
-from pathlib import Path
-sys.path.append(str(Path(__file__).resolve().parent.parent))
-
 import numpy as np
 import pandas as pd
+
 import config
+from src.base import Detector, ScoreThresholdDetector
 
-class EWMABaselineDetector:
-    """
-    Detector tradicional de anomalías basado en EWMA sobre métricas de velocidad de flujo.
-    """
-    def __init__(self, alpha=config.EWMA_ALPHA, threshold_std=config.EWMA_THRESHOLD_STD):
-        self.alpha = alpha
-        self.threshold_std = threshold_std
 
-    def fit_predict(self, df_raw):
-        rates = df_raw['Rate']
-        # EWMA vectorizado en C/Pandas
-        ewma_mean = rates.ewm(alpha=self.alpha).mean()
-        ewma_std = rates.ewm(alpha=self.alpha).std().fillna(0)
+class StaticVolumetricThreshold(ScoreThresholdDetector):
+    name = "Pre: Umbral Rate"
 
-        threshold = ewma_mean + self.threshold_std * ewma_std
-        predictions = ((rates > threshold) & (rates > 15.0)).astype(int).values
-        return predictions
+    def fit(self, X_train, y_train):
+        return self  # sin parámetros: el umbral se fija en calibrate()
 
-def run_baseline_evaluation(df_raw, y_true=None):
-    """
-    Ejecuta el modelo tradicional EWMA sobre el dataframe crudo de tráfico y retorna predicciones.
-    Acepta opcionalmente y_true para mantener compatibilidad con main.py.
-    """
-    detector = EWMABaselineDetector()
-    y_pred_baseline = detector.fit_predict(df_raw)
-    return y_pred_baseline
+    def decision_scores(self, X):
+        return X[config.RATE_COLUMN].to_numpy(dtype=np.float64)
+
+
+class EWMADetector(Detector):
+    name = "Pre: EWMA (ref.)"
+
+    def __init__(self, alpha=None, k=None):
+        self.alpha = config.EWMA_ALPHA if alpha is None else alpha
+        self.k = config.EWMA_K if k is None else k
+        self.threshold_ = self.k
+
+    def fit(self, X_train, y_train):
+        return self
+
+    def decision_scores(self, X):
+        r = pd.Series(X[config.RATE_COLUMN].to_numpy(dtype=np.float64))
+        mean = r.ewm(alpha=self.alpha, adjust=False).mean().shift(1)
+        std = r.ewm(alpha=self.alpha, adjust=False).std().shift(1)
+        z = (r - mean) / (std + 1e-9)
+        return z.fillna(0.0).to_numpy()
+
+    def predict(self, X):
+        return (self.decision_scores(X) > self.k).astype(np.int8)
