@@ -1,0 +1,13 @@
+model,class,n,pred_ataque_%
+Pre: Umbral Rate,BenignTraffic,53515.0,1.0516677567037278
+Pre: Umbral Rate,DDoS-SlowLoris,1160.0,7.310344827586208
+Post-A: PCA+KM benigno,BenignTraffic,53515.0,1.037839857983743
+Post-A: PCA+KM benigno,DDoS-SlowLoris,1160.0,10.39655172413793
+Post-B: PCA+KM voto 1:1,BenignTraffic,53515.0,2.922545080818462
+Post-B: PCA+KM voto 1:1,DDoS-SlowLoris,1160.0,96.9655172413793
+Abl: PCA+KM voto sin balancear,BenignTraffic,53515.0,0.0
+Abl: PCA+KM voto sin balancear,DDoS-SlowLoris,1160.0,0.0
+Ref: IsolationForest,BenignTraffic,53515.0,0.9679529103989536
+Ref: IsolationForest,DDoS-SlowLoris,1160.0,0.8448275862068966
+Ref: RandomForest (sup.),BenignTraffic,53515.0,0.0
+Ref: RandomForest (sup.),DDoS-SlowLoris,1160.0,99.91379310344828
