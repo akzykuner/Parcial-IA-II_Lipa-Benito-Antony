@@ -20,3 +20,6 @@ Salidas en `output/`: `results_summary.csv`, `results_per_seed.csv`, `per_class_
 
 ## Reproducibilidad
 Todos los hiperparámetros están en `config.py`.
+
+## Fuentes
+https://drive.google.com/drive/folders/10OjgD9kRiQRmTlWfdjK_sG4ifzDsapua?usp=sharing
