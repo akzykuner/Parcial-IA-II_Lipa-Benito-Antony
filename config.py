@@ -1,10 +1,5 @@
 """
 config.py - Configuración global del experimento (UNICA fuente de verdad)
-=========================================================================
-Tema 10: Detección de DDoS de baja tasa (LDDoS) mediante agrupamiento inteligente.
-Dataset: CICIoT2023 (CSV de flujos). Ruta B: BenignTraffic vs DDoS-SlowLoris.
-
-Todo valor que aparezca en el artículo debe salir de este archivo.
 """
 from pathlib import Path
 
