@@ -3,7 +3,7 @@
 Examen Parcial de Inteligencia Artificial II (UNI-FIEE, 2026-2).
 
 ## Datos
-1. Descargue CICIoT2023 (CSV `train`, `test`, `validation`) desde el sitio oficial del Canadian Institute for Cybersecurity (UNB) y colóquelos en `data/raw/`.
+1. Descargue CICIoT2023 (CSV `train`, `test`, `validation`) desde el sitio oficial del Canadian Institute for Cybersecurity (UNB) o Kaggle y colóquelos en `data/raw/`.
 2. Verifique los nombres de clase: `python main.py --list-classes`.
    Si difieren de `BenignTraffic` / `DDoS-SlowLoris`, corrija `config.py`.
 
