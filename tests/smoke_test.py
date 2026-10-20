@@ -1,8 +1,6 @@
 """
 tests/smoke_test.py - SOLO verifica que el código corre de punta a punta.
-Genera un CSV SINTÉTICO diminuto con las columnas de CICIoT2023. Sus números NO
-tienen ningún valor científico y NO deben usarse en el artículo.
-Uso:  python tests/smoke_test.py
+Genera un CSV SINTÉTICO diminuto con las columnas de CICIoT2023.
 """
 import subprocess
 import sys
